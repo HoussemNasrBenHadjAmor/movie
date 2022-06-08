@@ -4,7 +4,10 @@ const Movie = ({ movieDetails, casts }) => {
   return (
     <div className="flex flex-col gap-3">
       <Poster movieDetails={movieDetails} />
-      <Casts casts={casts} />
+      <Casts
+        casts={casts}
+        movieName={movieDetails.original_title || movieDetails.title}
+      />
     </div>
   )
 }
@@ -12,7 +15,9 @@ const Movie = ({ movieDetails, casts }) => {
 export default Movie
 
 export const getServerSideProps = async (context) => {
-  const { id } = context.query
+  var { id } = context.query
+
+  id = id.split('-')[0]
 
   const movieDetails = await fetch(
     `${process.env.API_URL}movie/${id}?api_key=${process.env.API_KEY}&language=en-US`
@@ -24,9 +29,8 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      id,
       movieDetails,
-      casts: casts.cast,
+      casts: casts,
     },
   }
 }

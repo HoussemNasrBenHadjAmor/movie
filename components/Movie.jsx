@@ -4,8 +4,18 @@ import Image from 'next/image'
 import { ThumbUpIcon } from '@heroicons/react/outline'
 
 const Movie = ({ data }) => {
+  const re = /[^a-zA-Z1-9-]/g
+
+  const movieLink = [
+    data?.id,
+    (data?.title || data?.original_title || data?.original_name || data?.name)
+      ?.split(' ')
+      .join('-')
+      .replace(re, '')
+      .toLowerCase(),
+  ].join('-')
   return (
-    <Link href={`/movie/${data.id}`}>
+    <Link href={`/movie/${movieLink}`}>
       <a className="group flex transform flex-col gap-3 transition duration-300 ease-in-out sm:hover:z-40 sm:hover:scale-105">
         <Image
           layout="responsive"
