@@ -14,6 +14,7 @@ const Movie = ({ data }) => {
       .replace(re, '')
       .toLowerCase(),
   ].join('-')
+
   return (
     <Link href={`/movie/${movieLink}`}>
       <a className="group flex transform flex-col gap-3 transition duration-300 ease-in-out sm:hover:z-40 sm:hover:scale-105">
@@ -38,7 +39,6 @@ const Movie = ({ data }) => {
           </h2>
 
           <p className="flex items-center gap-1 opacity-0 group-hover:opacity-100">
-            {/* {data.media_type && `${data.media_type} •`}{' '} */}
             {data.release_date || data.first_air_date} •{' '}
             <ThumbUpIcon className="w-5" /> {data.vote_count}
           </p>
