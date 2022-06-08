@@ -6,7 +6,7 @@ const Cast = ({ cast: { character, profile_path, name, original_name } }) => {
         className="h-32 w-full rounded-t-lg object-cover sm:h-[180px]"
       />
 
-      <div className="flex max-w-[150px] flex-col px-3">
+      <div className="flex flex-col px-2">
         <p className="cursor-pointer text-sm font-bold text-black hover:text-gray-500">
           {name || original_name}
         </p>
