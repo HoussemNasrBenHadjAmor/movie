@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import prettyMilliseconds from 'pretty-ms'
 
 const Poster = ({ movieDetails }) => {
@@ -6,7 +7,7 @@ const Poster = ({ movieDetails }) => {
       <div className="relative flex w-full flex-col items-center justify-center">
         <img
           src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`}
-          className="h-52 w-full object-cover lg:h-[500px] lg:opacity-10"
+          className="-z-50 h-52 w-full object-cover lg:h-[500px] lg:opacity-10"
           loading="lazy"
         />
 
@@ -21,16 +22,13 @@ const Poster = ({ movieDetails }) => {
             <div className="mx-auto hidden flex-col gap-3 lg:flex lg:max-w-2xl xl:max-w-5xl">
               <h3 className="text-3xl font-semibold text-white">
                 {movieDetails?.original_title || movieDetails?.title} (
-                {movieDetails?.release_date.substring(0, 4)})
+                {movieDetails?.release_date?.substring(0, 4)})
               </h3>
 
               <p className="flex items-center gap-1">
                 {movieDetails?.release_date} (
                 {movieDetails?.production_countries[0]?.iso_3166_1}) •{' '}
-                {movieDetails?.genres?.map((g) => (
-                  <span key={g.name}>{g.name}, </span>
-                ))}{' '}
-                •{' '}
+                {movieDetails?.genres?.map((g) => g.name).join(', ')} •{' '}
                 {movieDetails?.runtime
                   ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
                   : null}
@@ -70,9 +68,7 @@ const Poster = ({ movieDetails }) => {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-1">
-              {movieDetails?.genres?.map((g) => (
-                <p key={g.name}>{g.name}, </p>
-              ))}
+              {movieDetails?.genres?.map((g) => g.name).join(', ')}
             </div>
           </div>
         </div>

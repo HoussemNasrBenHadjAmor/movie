@@ -7,7 +7,6 @@ import {
   lastestTvFetch,
   comingMoviesFetch,
   comingTvFetch,
-  todayDay,
 } from '../utils/index'
 
 const Index = ({ data }) => {
@@ -30,19 +29,22 @@ const Index = ({ data }) => {
 export default Index
 
 export const getServerSideProps = async () => {
-  const tvTrending = await fetch(trendingTvFetch).then((res) => res.json())
+  const [
+    tvTrending,
+    movieTrending,
+    movieLatest,
+    tvLatest,
+    movieUpcoming,
+    tvUpcoming,
+  ] = await Promise.all([
+    fetch(trendingTvFetch).then((res) => res.json()),
 
-  const movieTrending = await fetch(trendingMovieFetch).then((res) =>
-    res.json()
-  )
-
-  const movieLatest = await fetch(latestMoviesFetch).then((res) => res.json())
-
-  const tvLatest = await fetch(lastestTvFetch).then((res) => res.json())
-
-  const movieUpcoming = await fetch(comingMoviesFetch).then((res) => res.json())
-
-  const tvUpcoming = await fetch(comingTvFetch).then((res) => res.json())
+    fetch(trendingMovieFetch).then((res) => res.json()),
+    fetch(latestMoviesFetch).then((res) => res.json()),
+    fetch(lastestTvFetch).then((res) => res.json()),
+    fetch(comingMoviesFetch).then((res) => res.json()),
+    fetch(comingTvFetch).then((res) => res.json()),
+  ])
 
   const data = {
     tvTrending: tvTrending.results,
