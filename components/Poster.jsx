@@ -11,7 +11,7 @@ const Poster = ({ movieDetails }) => {
           loading="lazy"
         />
 
-        <div className="absolute left-4 z-50 mx-auto max-w-7xl sm:px-5 lg:inset-auto">
+        <div className="absolute left-4 z-50 mx-auto max-w-[1400px] sm:px-5 lg:inset-auto">
           <div className="flex items-center justify-center gap-5">
             <img
               src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.poster_path}`}

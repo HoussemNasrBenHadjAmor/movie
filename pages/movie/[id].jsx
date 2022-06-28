@@ -1,18 +1,15 @@
 import { Poster, Casts, MovieDetails, MovieBody } from '../../components'
 
-const Movie = ({ movieDetails, casts, externalLinks, keywords }) => {
+const Movie = ({
+  movieDetails,
+  casts,
+  externalLinks,
+  keywords,
+  collections,
+}) => {
   return (
     <div className="flex flex-col gap-y-3">
       <Poster movieDetails={movieDetails} />
-      {/* <Casts
-        casts={casts}
-        movieName={movieDetails.original_title || movieDetails.title}
-      />
-      <MovieDetails
-        links={externalLinks}
-        keywords={keywords}
-        movieDetails={movieDetails}
-      /> */}
 
       <MovieBody
         links={externalLinks}
@@ -20,6 +17,7 @@ const Movie = ({ movieDetails, casts, externalLinks, keywords }) => {
         movieDetails={movieDetails}
         casts={casts}
         movieName={movieDetails.original_title || movieDetails.title}
+        collections={collections}
       />
     </div>
   )
@@ -47,12 +45,22 @@ export const getServerSideProps = async (ctx) => {
     ).then((res) => res.json()),
   ])
 
+  let collections = {}
+
+  if (movieDetails?.belongs_to_collection?.id) {
+    collections = await fetch(
+      `${process.env.API_URL}collection/${movieDetails?.belongs_to_collection?.id}?api_key=${process.env.API_KEY}`
+    ).then((res) => res.json())
+  }
+
   return {
     props: {
       movieDetails,
       casts,
       externalLinks,
-      keywords: keywords.keywords,
+      keywords: keywords?.keywords,
+      collections:
+        collections && collections?.parts ? collections?.parts : null,
     },
   }
 }
