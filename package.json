@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "currency-formatter": "^1.5.9",
     "dear-image.detect-background-color": "^1.0.1",
     "next": "latest",
     "nprogress": "^0.2.0",

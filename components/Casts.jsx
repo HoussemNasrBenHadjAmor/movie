@@ -13,7 +13,7 @@ const Casts = ({ casts, movieName }) => {
   ].join('-')
 
   return (
-    <div className="mb-5 flex flex-col gap-5 px-10">
+    <div className="mb-5 flex flex-col gap-5">
       <h1 className="text-base text-white sm:text-xl">Top Billed Cast</h1>
 
       <div className="flex flex-row flex-nowrap gap-4 overflow-scroll scrollbar-hide">

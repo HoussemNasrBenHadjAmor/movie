@@ -1,10 +1,10 @@
-import { Poster, Casts, MovieDetails } from '../../components'
+import { Poster, Casts, MovieDetails, MovieBody } from '../../components'
 
 const Movie = ({ movieDetails, casts, externalLinks, keywords }) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-y-3">
       <Poster movieDetails={movieDetails} />
-      <Casts
+      {/* <Casts
         casts={casts}
         movieName={movieDetails.original_title || movieDetails.title}
       />
@@ -12,6 +12,14 @@ const Movie = ({ movieDetails, casts, externalLinks, keywords }) => {
         links={externalLinks}
         keywords={keywords}
         movieDetails={movieDetails}
+      /> */}
+
+      <MovieBody
+        links={externalLinks}
+        keywords={keywords}
+        movieDetails={movieDetails}
+        casts={casts}
+        movieName={movieDetails.original_title || movieDetails.title}
       />
     </div>
   )

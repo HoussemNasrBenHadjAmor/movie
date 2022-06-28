@@ -11,15 +11,15 @@ const Poster = ({ movieDetails }) => {
           loading="lazy"
         />
 
-        <div className="absolute left-4 z-50 lg:inset-auto xl:px-3">
+        <div className="absolute left-4 z-50 mx-auto max-w-7xl sm:px-5 lg:inset-auto">
           <div className="flex items-center justify-center gap-5">
             <img
               src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.poster_path}`}
-              className="h-32 w-auto rounded-md object-contain shadow-md md:h-48 lg:h-[400px]"
+              className="h-36 w-auto rounded-md object-contain shadow-md md:h-48 lg:h-[450px]"
               loading="lazy"
             />
 
-            <div className="mx-auto hidden flex-col gap-3 lg:flex lg:max-w-2xl xl:max-w-5xl">
+            <div className="mx-auto hidden flex-col gap-3 lg:flex">
               <h3 className="text-3xl font-semibold text-white">
                 {movieDetails?.original_title || movieDetails?.title} (
                 {movieDetails?.release_date?.substring(0, 4)})
