@@ -19,7 +19,7 @@ const Poster = ({ movieDetails }) => {
 
             <div className="mx-auto hidden flex-col gap-3 lg:flex">
               <h3 className="text-3xl font-semibold text-white">
-                {movieDetails?.original_title || movieDetails?.title} (
+                {movieDetails?.title || movieDetails?.original_title} (
                 {movieDetails?.release_date?.substring(0, 4)})
               </h3>
 

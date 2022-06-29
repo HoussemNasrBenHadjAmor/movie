@@ -9,7 +9,7 @@ const Collection = ({ collectionName, collectionDetails }) => {
   ].join('-')
 
   return (
-    <div className="relative -mx-5 flex flex-col justify-center rounded-md sm:mx-0">
+    <div className="relative -mx-5 flex flex-col justify-center sm:mx-0">
       <div>
         <img
           src={
@@ -17,7 +17,7 @@ const Collection = ({ collectionName, collectionDetails }) => {
             `${imageURL}${collectionName?.poster_path}`
           }
           alt="collection-back"
-          className="-z-50 h-[250px] w-screen rounded-md object-cover opacity-20"
+          className="-z-50 h-[250px] w-screen object-cover opacity-20 sm:rounded-md"
         />
       </div>
 
