@@ -1,4 +1,4 @@
-import { Poster, Casts, MovieDetails, MovieBody } from '../../components'
+import { Poster, MovieBody } from '../../components'
 
 const Movie = ({
   movieDetails,
@@ -6,6 +6,7 @@ const Movie = ({
   externalLinks,
   keywords,
   collections,
+  recommendations,
 }) => {
   return (
     <div className="flex flex-col gap-y-3">
@@ -18,6 +19,7 @@ const Movie = ({
         casts={casts}
         movieName={movieDetails.original_title || movieDetails.title}
         collections={collections}
+        recommendations={recommendations}
       />
     </div>
   )
@@ -30,20 +32,24 @@ export const getServerSideProps = async (ctx) => {
 
   id = id.split('-')[0]
 
-  const [movieDetails, casts, externalLinks, keywords] = await Promise.all([
-    fetch(
-      `${process.env.API_URL}movie/${id}?api_key=${process.env.API_KEY}&language=en-US`
-    ).then((res) => res.json()),
-    fetch(
-      `${process.env.API_URL}movie/${id}/credits?api_key=${process.env.API_KEY}&language=en-US`
-    ).then((res) => res.json()),
-    fetch(
-      `${process.env.API_URL}movie/${id}/external_ids?api_key=${process.env.API_KEY}`
-    ).then((res) => res.json()),
-    fetch(
-      `${process.env.API_URL}movie/${id}/keywords?api_key=${process.env.API_KEY}`
-    ).then((res) => res.json()),
-  ])
+  const [movieDetails, casts, externalLinks, keywords, recommendations] =
+    await Promise.all([
+      fetch(
+        `${process.env.API_URL}movie/${id}?api_key=${process.env.API_KEY}&language=en-US`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.API_URL}movie/${id}/credits?api_key=${process.env.API_KEY}&language=en-US`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.API_URL}movie/${id}/external_ids?api_key=${process.env.API_KEY}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.API_URL}movie/${id}/keywords?api_key=${process.env.API_KEY}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.API_URL}movie/${id}/recommendations?api_key=${process.env.API_KEY}&language=en-US&page=1`
+      ).then((res) => res.json()),
+    ])
 
   let collections = {}
 
@@ -61,6 +67,7 @@ export const getServerSideProps = async (ctx) => {
       keywords: keywords?.keywords,
       collections:
         collections && collections?.parts ? collections?.parts : null,
+      recommendations: recommendations?.results,
     },
   }
 }

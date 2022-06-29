@@ -8,7 +8,6 @@ const Poster = ({ movieDetails }) => {
         <img
           src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`}
           className="-z-50 h-52 w-full object-cover lg:h-[500px] lg:opacity-10"
-          loading="lazy"
         />
 
         <div className="absolute left-4 z-50 mx-auto max-w-[1400px] sm:px-5 lg:inset-auto">
@@ -16,7 +15,6 @@ const Poster = ({ movieDetails }) => {
             <img
               src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.poster_path}`}
               className="h-36 w-auto rounded-md object-contain shadow-md md:h-48 lg:h-[450px]"
-              loading="lazy"
             />
 
             <div className="mx-auto hidden flex-col gap-3 lg:flex">
@@ -27,8 +25,10 @@ const Poster = ({ movieDetails }) => {
 
               <p className="flex items-center gap-1">
                 {movieDetails?.release_date} (
-                {movieDetails?.production_countries[0]?.iso_3166_1}) •{' '}
-                {movieDetails?.genres?.map((g) => g.name).join(', ')} •{' '}
+                {movieDetails?.production_countries?.length
+                  ? movieDetails?.production_countries[0]?.iso_3166_1
+                  : (movieDetails?.original_language).toUpperCase()}
+                ) • {movieDetails?.genres?.map((g) => g.name).join(', ')} •{' '}
                 {movieDetails?.runtime
                   ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
                   : null}
@@ -61,7 +61,10 @@ const Poster = ({ movieDetails }) => {
           <div className="flex flex-col items-center justify-center">
             <p>
               {movieDetails?.release_date} (
-              {movieDetails?.production_countries[0].iso_3166_1}) •{' '}
+              {movieDetails?.production_countries?.length
+                ? movieDetails?.production_countries[0]?.iso_3166_1
+                : (movieDetails?.original_language).toUpperCase()}
+              ) •{' '}
               {movieDetails?.runtime
                 ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
                 : null}

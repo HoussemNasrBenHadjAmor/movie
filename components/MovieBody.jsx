@@ -1,4 +1,4 @@
-import { Casts, MovieDetails, Collection } from './'
+import { Casts, MovieDetails, Collection, Recommendations } from './'
 
 const MovieBody = ({
   keywords,
@@ -7,6 +7,7 @@ const MovieBody = ({
   casts,
   movieName,
   collections,
+  recommendations,
 }) => {
   return (
     <div className="mx-auto mt-5 mb-5 flex w-full max-w-[1400px] flex-col gap-5 px-5 lg:flex-row">
@@ -24,7 +25,13 @@ const MovieBody = ({
           </>
         )}
 
-        <hr className="w-full font-extralight text-gray-200" />
+        {recommendations && recommendations?.length > 0 && (
+          <>
+            <hr className="w-full font-extralight text-gray-200" />
+
+            <Recommendations recommendations={recommendations} />
+          </>
+        )}
       </div>
 
       <div className="w-full lg:w-1/5">

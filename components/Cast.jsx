@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import defaultPerson from '../public/person.jpg'
+
 const Cast = ({
   cast: { character, profile_path, name, original_name, id },
 }) => {
@@ -13,7 +15,11 @@ const Cast = ({
       <Link href={`/person/${personUrl}`}>
         <a>
           <img
-            src={`${process.env.NEXT_PUBLIC_BASE_URL}${profile_path}`}
+            src={
+              profile_path
+                ? `${process.env.NEXT_PUBLIC_BASE_URL}${profile_path}`
+                : defaultPerson.src
+            }
             className="h-32 w-full rounded-t-lg object-cover sm:h-[180px]"
           />
         </a>
