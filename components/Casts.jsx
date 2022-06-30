@@ -4,11 +4,11 @@ import { Cast } from '.'
 
 import { ArrowSmRightIcon } from '@heroicons/react/outline'
 
-const Casts = ({ casts, movieName }) => {
+const Casts = ({ casts, movieName, id, nbEp }) => {
   const re = /[^a-zA-Z1-9-]/g
 
   const urlCasts = [
-    casts?.id,
+    id,
     movieName?.split(' ').join('-').replace(re, '').toLowerCase(),
   ].join('-')
 
@@ -18,7 +18,7 @@ const Casts = ({ casts, movieName }) => {
 
       <div className="flex flex-row flex-nowrap gap-4 overflow-scroll pb-3 scrollbar-hide">
         {casts?.cast?.slice(0, 9)?.map((cast) => (
-          <Cast key={cast.id} cast={cast} />
+          <Cast key={cast.id} cast={cast} nbEp={nbEp} />
         ))}
 
         <div className="flex min-w-[128px] items-center justify-center text-white">

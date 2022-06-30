@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import prettyMilliseconds from 'pretty-ms'
 
 const Poster = ({ movieDetails }) => {
@@ -19,18 +18,28 @@ const Poster = ({ movieDetails }) => {
 
             <div className="mx-auto hidden flex-col gap-3 lg:flex">
               <h3 className="text-3xl font-semibold text-white">
-                {movieDetails?.title || movieDetails?.original_title} (
-                {movieDetails?.release_date?.substring(0, 4)})
+                {movieDetails?.title ||
+                  movieDetails?.original_title ||
+                  movieDetails?.name ||
+                  movieDetails?.original_name}{' '}
+                (
+                {movieDetails?.release_date?.substring(0, 4) ||
+                  movieDetails?.first_air_date?.substring(0, 4)}
+                )
               </h3>
 
               <p className="flex items-center gap-1">
-                {movieDetails?.release_date} (
+                {movieDetails?.release_date || movieDetails?.first_air_date} (
                 {movieDetails?.production_countries?.length
                   ? movieDetails?.production_countries[0]?.iso_3166_1
-                  : (movieDetails?.original_language).toUpperCase()}
+                  : movieDetails?.original_language?.toUpperCase()}
                 ) • {movieDetails?.genres?.map((g) => g.name).join(', ')} •{' '}
                 {movieDetails?.runtime
                   ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
+                  : movieDetails?.episode_run_time
+                  ? prettyMilliseconds(
+                      movieDetails?.episode_run_time[0] * 60 * 1000
+                    )
                   : null}
               </p>
 
@@ -54,22 +63,31 @@ const Poster = ({ movieDetails }) => {
       <div className="mt-5 flex flex-col gap-2 lg:hidden">
         <div className="flex flex-col items-center justify-center gap-2">
           <h3 className="text-center text-lg font-semibold text-white">
-            {movieDetails?.original_title || movieDetails?.title} (
-            {movieDetails?.release_date?.substring(0, 4)})
+            {movieDetails?.title ||
+              movieDetails?.original_title ||
+              movieDetails?.name ||
+              movieDetails?.original_name}{' '}
+            (
+            {movieDetails?.release_date?.substring(0, 4) ||
+              movieDetails?.first_air_date?.substring(0, 4)}
+            )
           </h3>
 
           <div className="flex flex-col items-center justify-center">
             <p>
-              {movieDetails?.release_date} (
+              {movieDetails?.release_date || movieDetails?.first_air_date} (
               {movieDetails?.production_countries?.length
                 ? movieDetails?.production_countries[0]?.iso_3166_1
-                : (movieDetails?.original_language).toUpperCase()}
+                : movieDetails?.original_language?.toUpperCase()}
               ) •{' '}
               {movieDetails?.runtime
                 ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
+                : movieDetails?.episode_run_time
+                ? prettyMilliseconds(
+                    movieDetails?.episode_run_time[0] * 60 * 1000
+                  )
                 : null}
             </p>
-
             <div className="flex flex-wrap items-center justify-center gap-1">
               {movieDetails?.genres?.map((g) => g.name).join(', ')}
             </div>

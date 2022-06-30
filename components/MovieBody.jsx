@@ -12,7 +12,12 @@ const MovieBody = ({
   return (
     <div className="mx-auto mt-5 mb-5 flex w-full max-w-[1400px] flex-col gap-10 px-5 lg:flex-row">
       <div className="flex w-full flex-col space-y-8 lg:w-4/5">
-        <Casts casts={casts} movieName={movieName} />
+        <Casts
+          id={movieDetails?.id}
+          casts={casts}
+          movieName={movieName}
+          nbEp={movieDetails?.number_of_episodes}
+        />
 
         {collections && (
           <>

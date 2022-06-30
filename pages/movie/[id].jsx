@@ -18,7 +18,7 @@ const Movie = ({
         keywords={keywords}
         movieDetails={movieDetails}
         casts={casts}
-        movieName={movieDetails.original_title || movieDetails.title}
+        movieName={movieDetails.title || movieDetails.original_title}
         collections={collections}
         recommendations={recommendations}
       />

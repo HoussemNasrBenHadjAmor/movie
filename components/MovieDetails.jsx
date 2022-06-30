@@ -55,32 +55,64 @@ const MovieDetails = ({ links, keywords, movieDetails }) => {
           <p className="font-light">{movieDetails?.status}</p>
         </div>
 
+        {movieDetails?.networks && (
+          <div className="font-semibold">
+            <p>Network</p>
+            <div className="mt-2 flex flex-row flex-wrap items-center gap-4">
+              {movieDetails?.networks?.map(({ id, logo_path }) => (
+                <div key={id}>
+                  <img
+                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo_path}`}
+                    alt="network"
+                    className="w-[80px] object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {movieDetails?.type && (
+          <div className="font-semibold">
+            <p>Type</p>
+            <p className="font-light">{movieDetails?.type}</p>
+          </div>
+        )}
+
         <div className="font-semibold">
           <p>Original Language</p>
           <p className="font-light">
             {originalLanguage
               ? originalLanguage?.english_name
-              : movieDetails.spoken_languages[0]?.english_name}
+              : movieDetails?.spoken_languages[0]?.english_name}
           </p>
         </div>
 
-        <div className="font-semibold">
-          <p>Budget</p>
-          <p className="font-light">
-            {movieDetails?.budget > 0
-              ? currencyFormatter.format(movieDetails?.budget, { code: 'USD' })
-              : '-'}
-          </p>
-        </div>
+        {movieDetails?.budget && (
+          <div className="font-semibold">
+            <p>Budget</p>
+            <p className="font-light">
+              {movieDetails?.budget > 0
+                ? currencyFormatter.format(movieDetails?.budget, {
+                    code: 'USD',
+                  })
+                : '-'}
+            </p>
+          </div>
+        )}
 
-        <div className="font-semibold">
-          <p>Revenue</p>
-          <p className="font-light">
-            {movieDetails?.revenue > 0
-              ? currencyFormatter.format(movieDetails?.revenue, { code: 'USD' })
-              : '-'}
-          </p>
-        </div>
+        {movieDetails?.revenue && (
+          <div className="font-semibold">
+            <p>Revenue</p>
+            <p className="font-light">
+              {movieDetails?.revenue > 0
+                ? currencyFormatter.format(movieDetails?.revenue, {
+                    code: 'USD',
+                  })
+                : '-'}
+            </p>
+          </div>
+        )}
 
         <div className="flex flex-col gap-2">
           <p className="font-semibold">Keywords</p>

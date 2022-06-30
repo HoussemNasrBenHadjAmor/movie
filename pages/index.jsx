@@ -38,7 +38,6 @@ export const getServerSideProps = async () => {
     tvUpcoming,
   ] = await Promise.all([
     fetch(trendingTvFetch).then((res) => res.json()),
-
     fetch(trendingMovieFetch).then((res) => res.json()),
     fetch(latestMoviesFetch).then((res) => res.json()),
     fetch(lastestTvFetch).then((res) => res.json()),

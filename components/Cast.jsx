@@ -4,6 +4,7 @@ import defaultPerson from '../public/person.jpg'
 
 const Cast = ({
   cast: { character, profile_path, name, original_name, id },
+  nbEp,
 }) => {
   const personUrl = [
     id,
@@ -25,14 +26,15 @@ const Cast = ({
         </a>
       </Link>
 
-      <div className="flex flex-col px-2">
+      <div className="flex flex-col px-2 text-sm text-gray-700">
         <Link href={`/person/${personUrl}`}>
-          <a className="text-sm font-bold text-black hover:text-gray-500">
+          <a className="font-bold text-black hover:text-gray-500">
             {name || original_name}
           </a>
         </Link>
 
-        <p className="text-sm text-gray-700">{character}</p>
+        <p>{character}</p>
+        {nbEp && <p className="text-xs text-gray-400">{nbEp} Episodes</p>}
       </div>
     </div>
   )
