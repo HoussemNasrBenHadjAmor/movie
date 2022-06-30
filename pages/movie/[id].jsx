@@ -1,4 +1,8 @@
-import { Poster, MovieBody } from '../../components'
+import { useRecoilValue } from 'recoil'
+
+import { modalState } from '../../atoms/modalAtom'
+
+import { Poster, MovieBody, Modal } from '../../components'
 
 const Movie = ({
   movieDetails,
@@ -9,6 +13,8 @@ const Movie = ({
   recommendations,
   video,
 }) => {
+  const showModal = useRecoilValue(modalState)
+
   return (
     <div className="flex flex-col gap-y-3">
       <Poster movieDetails={movieDetails} video={video} />
@@ -22,6 +28,8 @@ const Movie = ({
         collections={collections}
         recommendations={recommendations}
       />
+
+      {showModal && <Modal />}
     </div>
   )
 }

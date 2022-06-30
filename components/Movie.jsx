@@ -8,7 +8,7 @@ const Movie = ({ data }) => {
 
   const movieLink = [
     data?.id,
-    (data?.title || data?.original_title || data?.name || data?.original_name)
+    (data?.title || data?.original_title || data?.original_name || data?.name)
       ?.split(' ')
       .join('-')
       .replace(re, '')

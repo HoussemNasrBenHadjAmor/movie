@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { Tag } from './'
 
 import currencyFormatter from 'currency-formatter'
@@ -60,13 +62,15 @@ const MovieDetails = ({ links, keywords, movieDetails }) => {
             <p>Network</p>
             <div className="mt-2 flex flex-row flex-wrap items-center gap-4">
               {movieDetails?.networks?.map(({ id, logo_path }) => (
-                <div key={id}>
-                  <img
-                    src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo_path}`}
-                    alt="network"
-                    className="w-[80px] object-contain"
-                  />
-                </div>
+                <Link href={`/network/${id}`} key={id}>
+                  <a>
+                    <img
+                      src={`${process.env.NEXT_PUBLIC_BASE_URL}${logo_path}`}
+                      alt="network"
+                      className="w-[80px] object-contain"
+                    />
+                  </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -88,7 +92,7 @@ const MovieDetails = ({ links, keywords, movieDetails }) => {
           </p>
         </div>
 
-        {movieDetails?.budget && (
+        {movieDetails?.budget >= 0 && (
           <div className="font-semibold">
             <p>Budget</p>
             <p className="font-light">
@@ -101,7 +105,7 @@ const MovieDetails = ({ links, keywords, movieDetails }) => {
           </div>
         )}
 
-        {movieDetails?.revenue && (
+        {movieDetails?.revenue >= 0 && (
           <div className="font-semibold">
             <p>Revenue</p>
             <p className="font-light">

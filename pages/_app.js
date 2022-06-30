@@ -1,5 +1,7 @@
 import Router from 'next/router'
 
+import { RecoilRoot } from 'recoil'
+
 import Layout from '../components/Layout'
 
 import nProgress from 'nprogress'
@@ -14,9 +16,11 @@ function MyApp({ Component, pageProps }) {
 
   Router.events.on('routeChangeComplete', () => nProgress.done())
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <RecoilRoot>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </RecoilRoot>
   )
 }
 

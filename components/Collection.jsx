@@ -37,7 +37,7 @@ const Collection = ({ collectionName, collectionDetails }) => {
         </div>
 
         <Link href={`/collection/${link}`}>
-          <a className="max-w-[250px] rounded-lg bg-slate-900 p-2 text-center font-medium uppercase transition-all duration-300 ease-in-out hover:bg-gray-900">
+          <a className="max-w-[250px] rounded-lg bg-slate-700 p-2 text-center font-medium uppercase transition-all duration-300 ease-in-out hover:bg-gray-900 hover:text-white">
             View The Collection
           </a>
         </Link>

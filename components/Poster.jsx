@@ -1,6 +1,14 @@
+import { useRecoilState } from 'recoil'
+import { modalState, trailerState } from '../atoms/modalAtom'
+
 import prettyMilliseconds from 'pretty-ms'
 
-const Poster = ({ movieDetails }) => {
+import { PlayIcon } from '@heroicons/react/solid'
+
+const Poster = ({ movieDetails, video }) => {
+  const [showModal, setShowModal] = useRecoilState(modalState)
+  const [tariler, setTrailer] = useRecoilState(trailerState)
+
   return (
     <div className="items-center justify-center lg:flex">
       <div className="relative flex w-full flex-col items-center justify-center">
@@ -42,6 +50,19 @@ const Poster = ({ movieDetails }) => {
                     )
                   : null}
               </p>
+
+              {video && (
+                <button
+                  onClick={() => {
+                    setTrailer(video)
+                    setShowModal(true)
+                  }}
+                  className="flex max-w-[140px] items-center justify-center gap-1 rounded-md bg-slate-700 p-2 transition-all duration-300 ease-in-out hover:bg-slate-900 hover:text-white"
+                >
+                  <PlayIcon className="h-5 w-5" />
+                  Play Trailer
+                </button>
+              )}
 
               <p className="text-lg font-medium text-gray-400">
                 {movieDetails?.tagline}
@@ -91,6 +112,19 @@ const Poster = ({ movieDetails }) => {
             <div className="flex flex-wrap items-center justify-center gap-1">
               {movieDetails?.genres?.map((g) => g.name).join(', ')}
             </div>
+
+            {video && (
+              <button
+                onClick={() => {
+                  setTrailer(video)
+                  setShowModal(true)
+                }}
+                className="mt-4 flex max-w-[140px] items-center justify-center gap-1 rounded-md bg-slate-700 p-2 text-sm transition-all duration-300 ease-in-out hover:bg-slate-900 hover:text-white"
+              >
+                <PlayIcon className="h-5 w-5" />
+                Play Trailer
+              </button>
+            )}
           </div>
         </div>
 
