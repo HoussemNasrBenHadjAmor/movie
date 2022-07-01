@@ -7,7 +7,7 @@ import { PlayIcon } from '@heroicons/react/solid'
 
 const Poster = ({ movieDetails, video }) => {
   const [showModal, setShowModal] = useRecoilState(modalState)
-  const [tariler, setTrailer] = useRecoilState(trailerState)
+  const [trailer, setTrailer] = useRecoilState(trailerState)
 
   return (
     <div className="items-center justify-center lg:flex">
