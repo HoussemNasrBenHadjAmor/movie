@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import movie from '../public/movie.png'
@@ -25,16 +26,31 @@ const Recommendation = ({
   ].join('-')
 
   return (
-    <div className="flex min-w-[75%] flex-col gap-3 rounded-lg bg-white pb-3 shadow-md sm:min-w-[25%]">
+    <div className="flex min-w-[75%] flex-col gap-3 rounded-lg border-none bg-white pb-3 shadow-md sm:min-w-[25%]">
       <Link href={`/${name ? 'tv' : 'movie'}/${movieLink}`}>
-        <a>
-          <img
+        <a className="relative">
+          {/* <img
             src={
               backdrop_path
                 ? `${process.env.NEXT_PUBLIC_BASE_URL}${backdrop_path}`
                 : movie.src
             }
             className="h-[150px] w-full rounded-t-lg object-cover"
+          /> */}
+
+          <Image
+            src={
+              backdrop_path
+                ? `${process.env.NEXT_PUBLIC_BASE_URL}${backdrop_path}`
+                : movie.src
+            }
+            layout="responsive"
+            placeholder="blur"
+            blurDataURL={`${process.env.NEXT_PUBLIC_BASE_URL}${backdrop_path}`}
+            height={150}
+            width={275}
+            objectFit="cover"
+            className="rounded-t-lg border-none"
           />
         </a>
       </Link>

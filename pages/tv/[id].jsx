@@ -44,7 +44,7 @@ export default Movie
 export const getServerSideProps = async (ctx) => {
   var { id } = ctx.query
 
-  id = id.split('-')[0]
+  id = id?.split('-')[0]
 
   const tvDetails = await fetch(
     `${process.env.API_URL}tv/${id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=videos,keywords,external_ids,recommendations,credits`

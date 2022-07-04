@@ -4,6 +4,7 @@ import moment from 'moment'
 import prettyMilliseconds from 'pretty-ms'
 
 import { PlayIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
 
 const Poster = ({ movieDetails, video }) => {
   const [showModal, setShowModal] = useRecoilState(modalState)
@@ -12,16 +13,22 @@ const Poster = ({ movieDetails, video }) => {
   return (
     <div className="items-center justify-center lg:flex">
       <div className="relative flex w-full flex-col items-center justify-center">
-        <img
-          src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`}
-          className="-z-50 h-52 w-full object-cover lg:h-[500px] lg:opacity-10"
-        />
+        <div className="relative -z-50 h-52 w-full lg:h-[500px] lg:opacity-10">
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`}
+            layout="fill"
+            placeholder="blur"
+            blurDataURL={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`}
+            objectFit="cover"
+          />
+        </div>
 
         <div className="absolute left-4 z-50 mx-auto max-w-[1400px] sm:px-5 lg:inset-auto">
           <div className="flex items-center justify-center gap-5">
             <img
               src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.poster_path}`}
               className="h-36 w-auto rounded-md object-contain shadow-md md:h-48 lg:h-[450px]"
+              loading="eager"
             />
 
             <div className="mx-auto hidden flex-col gap-3 lg:flex">
