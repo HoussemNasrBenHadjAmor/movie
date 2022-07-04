@@ -11,6 +11,7 @@ const Movie = ({
   keywords,
   recommendations,
   video,
+  lastSeason,
 }) => {
   const showModal = useRecoilValue(modalState)
 
@@ -30,6 +31,7 @@ const Movie = ({
           tvDetails?.original_name
         }
         recommendations={recommendations}
+        lastSeason={lastSeason}
       />
 
       {showModal && <Modal />}
@@ -54,6 +56,10 @@ export const getServerSideProps = async (ctx) => {
 
   const trailer = tvDetails?.videos?.results[index]?.key || 'juxTC7hYGTE'
 
+  const lastSeason = tvDetails?.seasons
+    ?.filter((s) => (s.air_date ? s : null))
+    .slice(-1)[0]
+
   return {
     props: {
       tvDetails,
@@ -62,6 +68,7 @@ export const getServerSideProps = async (ctx) => {
       keywords: tvDetails?.keywords?.results,
       recommendations: tvDetails?.recommendations?.results,
       video: trailer,
+      lastSeason,
     },
   }
 }

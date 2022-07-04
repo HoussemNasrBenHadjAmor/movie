@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil'
 import { modalState, trailerState } from '../atoms/modalAtom'
-
+import moment from 'moment'
 import prettyMilliseconds from 'pretty-ms'
 
 import { PlayIcon } from '@heroicons/react/solid'
@@ -31,13 +31,17 @@ const Poster = ({ movieDetails, video }) => {
                   movieDetails?.name ||
                   movieDetails?.original_name}{' '}
                 (
-                {movieDetails?.release_date?.substring(0, 4) ||
-                  movieDetails?.first_air_date?.substring(0, 4)}
+                {moment(
+                  movieDetails?.release_date || movieDetails?.first_air_date
+                ).format('YYYY')}
                 )
               </h3>
 
               <p className="flex items-center gap-1">
-                {movieDetails?.release_date || movieDetails?.first_air_date} (
+                {moment(
+                  movieDetails?.release_date || movieDetails?.first_air_date
+                ).format('MM/DD/YYYY')}{' '}
+                (
                 {movieDetails?.production_countries?.length
                   ? movieDetails?.production_countries[0]?.iso_3166_1
                   : movieDetails?.original_language?.toUpperCase()}
@@ -89,14 +93,18 @@ const Poster = ({ movieDetails, video }) => {
               movieDetails?.name ||
               movieDetails?.original_name}{' '}
             (
-            {movieDetails?.release_date?.substring(0, 4) ||
-              movieDetails?.first_air_date?.substring(0, 4)}
+            {moment(
+              movieDetails?.release_date || movieDetails?.first_air_date
+            ).format('YYYY')}
             )
           </h3>
 
           <div className="flex flex-col items-center justify-center">
             <p>
-              {movieDetails?.release_date || movieDetails?.first_air_date} (
+              {moment(
+                movieDetails?.release_date || movieDetails?.first_air_date
+              ).format('MM/DD/YYYY')}{' '}
+              (
               {movieDetails?.production_countries?.length
                 ? movieDetails?.production_countries[0]?.iso_3166_1
                 : movieDetails?.original_language?.toUpperCase()}

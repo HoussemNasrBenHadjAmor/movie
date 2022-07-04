@@ -22,7 +22,7 @@ const Casts = ({ casts, movieName, id, nbEp }) => {
         ))}
 
         <div className="flex min-w-[128px] items-center justify-center text-white">
-          <Link href={`/movie/${urlCasts}/cast`}>
+          <Link href={`/${nbEp ? 'tv' : 'movie'}/${urlCasts}/cast`}>
             <a className="flex items-center justify-center gap-1">
               <h1>View More</h1>
 
