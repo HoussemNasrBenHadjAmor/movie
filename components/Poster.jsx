@@ -5,6 +5,7 @@ import prettyMilliseconds from 'pretty-ms'
 
 import { PlayIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
+import movie from '../public/movie.png'
 
 const Poster = ({ movieDetails, video }) => {
   const [showModal, setShowModal] = useRecoilState(modalState)
@@ -15,7 +16,11 @@ const Poster = ({ movieDetails, video }) => {
       <div className="relative flex w-full flex-col items-center justify-center">
         <div className="relative -z-50 h-52 w-full lg:h-[500px] lg:opacity-10">
           <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`}
+            src={
+              movieDetails?.backdrop_path
+                ? `${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`
+                : movie.src
+            }
             layout="fill"
             placeholder="blur"
             blurDataURL={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`}
@@ -26,7 +31,11 @@ const Poster = ({ movieDetails, video }) => {
         <div className="absolute left-4 z-50 mx-auto max-w-[1400px] sm:px-5 lg:inset-auto">
           <div className="flex items-center justify-center gap-5">
             <img
-              src={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.poster_path}`}
+              src={
+                movieDetails?.poster_path
+                  ? `${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.poster_path}`
+                  : movie.src
+              }
               className="h-36 w-auto rounded-md object-contain shadow-md md:h-48 lg:h-[450px]"
               loading="eager"
             />
@@ -37,17 +46,19 @@ const Poster = ({ movieDetails, video }) => {
                   movieDetails?.original_title ||
                   movieDetails?.name ||
                   movieDetails?.original_name}{' '}
-                (
-                {moment(
-                  movieDetails?.release_date || movieDetails?.first_air_date
-                ).format('YYYY')}
-                )
+                {movieDetails?.release_date || movieDetails?.first_air_date
+                  ? `(${moment(
+                      movieDetails?.release_date || movieDetails?.first_air_date
+                    ).format('YYYY')})`
+                  : null}
               </h3>
 
               <p className="flex items-center gap-1">
-                {moment(
-                  movieDetails?.release_date || movieDetails?.first_air_date
-                ).format('MM/DD/YYYY')}{' '}
+                {movieDetails?.release_date || movieDetails?.first_air_date
+                  ? moment(
+                      movieDetails?.release_date || movieDetails?.first_air_date
+                    ).format('MM/DD/YYYY')
+                  : null}{' '}
                 (
                 {movieDetails?.production_countries?.length
                   ? movieDetails?.production_countries[0]?.iso_3166_1
@@ -99,18 +110,20 @@ const Poster = ({ movieDetails, video }) => {
               movieDetails?.original_title ||
               movieDetails?.name ||
               movieDetails?.original_name}{' '}
-            (
-            {moment(
-              movieDetails?.release_date || movieDetails?.first_air_date
-            ).format('YYYY')}
-            )
+            {movieDetails?.release_date || movieDetails?.first_air_date
+              ? `(${moment(
+                  movieDetails?.release_date || movieDetails?.first_air_date
+                ).format('YYYY')})`
+              : null}
           </h3>
 
           <div className="flex flex-col items-center justify-center">
             <p>
-              {moment(
-                movieDetails?.release_date || movieDetails?.first_air_date
-              ).format('MM/DD/YYYY')}{' '}
+              {movieDetails?.release_date || movieDetails?.first_air_date
+                ? moment(
+                    movieDetails?.release_date || movieDetails?.first_air_date
+                  ).format('MM/DD/YYYY')
+                : null}{' '}
               (
               {movieDetails?.production_countries?.length
                 ? movieDetails?.production_countries[0]?.iso_3166_1

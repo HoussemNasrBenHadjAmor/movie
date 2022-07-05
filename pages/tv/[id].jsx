@@ -54,9 +54,10 @@ export const getServerSideProps = async (ctx) => {
     (v) => v.type.toLowerCase() === 'trailer'
   )
 
-  const trailer = tvDetails?.videos?.results[index]?.key || 'juxTC7hYGTE'
+  const trailer = tvDetails?.videos?.results[index]?.key || null
 
-  const lastSeason = tvDetails?.seasons?.filter((s) => s.air_date).slice(-1)[0]
+  const lastSeason =
+    tvDetails?.seasons?.filter((s) => s?.air_date)?.slice(-1)[0] || null
 
   return {
     props: {
