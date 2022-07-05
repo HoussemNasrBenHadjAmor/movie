@@ -1,15 +1,44 @@
-import { useRecoilState } from 'recoil'
-import { modalState, trailerState } from '../atoms/modalAtom'
+import Image from 'next/image'
 import moment from 'moment'
 import prettyMilliseconds from 'pretty-ms'
+import { useRecoilState } from 'recoil'
+import { modalState, trailerState } from '../atoms/modalAtom'
 
-import { PlayIcon } from '@heroicons/react/solid'
-import Image from 'next/image'
 import movie from '../public/movie.png'
+import { PlayIcon } from '@heroicons/react/solid'
 
 const Poster = ({ movieDetails, video }) => {
   const [showModal, setShowModal] = useRecoilState(modalState)
   const [trailer, setTrailer] = useRecoilState(trailerState)
+
+  const movieName =
+    movieDetails?.title ||
+    movieDetails?.original_title ||
+    movieDetails?.name ||
+    movieDetails?.original_name
+
+  const isDateExist = movieDetails?.release_date || movieDetails?.first_air_date
+
+  const productionCountry = movieDetails?.production_countries?.length
+    ? movieDetails?.production_countries[0]?.iso_3166_1
+    : movieDetails?.original_language?.toUpperCase()
+
+  const movieRunTime = movieDetails?.runtime
+    ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
+    : movieDetails?.episode_run_time[0]
+    ? prettyMilliseconds(movieDetails?.episode_run_time[0] * 60 * 1000)
+    : null
+
+  const OverView = ({ movieDetails }) => (
+    <div className="flex flex-col gap-2">
+      <p className="text-2xl">Overview</p>
+      <p>
+        {movieDetails?.overview
+          ? movieDetails?.overview
+          : "We don't have an overview translated in English. Help us expand our movieDetailsbase by adding one."}
+      </p>
+    </div>
+  )
 
   return (
     <div className="items-center justify-center lg:flex">
@@ -34,7 +63,7 @@ const Poster = ({ movieDetails, video }) => {
               src={
                 movieDetails?.poster_path
                   ? `${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.poster_path}`
-                  : movie.src
+                  : ''
               }
               className="h-36 w-auto rounded-md object-contain shadow-md md:h-48 lg:h-[450px]"
               loading="eager"
@@ -42,35 +71,15 @@ const Poster = ({ movieDetails, video }) => {
 
             <div className="mx-auto hidden flex-col gap-3 lg:flex">
               <h3 className="text-3xl font-semibold text-white">
-                {movieDetails?.title ||
-                  movieDetails?.original_title ||
-                  movieDetails?.name ||
-                  movieDetails?.original_name}{' '}
-                {movieDetails?.release_date || movieDetails?.first_air_date
-                  ? `(${moment(
-                      movieDetails?.release_date || movieDetails?.first_air_date
-                    ).format('YYYY')})`
-                  : null}
+                {movieName}{' '}
+                {isDateExist ? `(${moment(isDateExist).format('YYYY')})` : null}
               </h3>
 
               <p className="flex items-center gap-1">
-                {movieDetails?.release_date || movieDetails?.first_air_date
-                  ? moment(
-                      movieDetails?.release_date || movieDetails?.first_air_date
-                    ).format('MM/DD/YYYY')
-                  : null}{' '}
-                (
-                {movieDetails?.production_countries?.length
-                  ? movieDetails?.production_countries[0]?.iso_3166_1
-                  : movieDetails?.original_language?.toUpperCase()}
-                ) • {movieDetails?.genres?.map((g) => g.name).join(', ')} •{' '}
-                {movieDetails?.runtime
-                  ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
-                  : movieDetails?.episode_run_time[0]
-                  ? prettyMilliseconds(
-                      movieDetails?.episode_run_time[0] * 60 * 1000
-                    )
-                  : null}
+                {isDateExist ? moment(isDateExist).format('MM/DD/YYYY') : null}{' '}
+                ({productionCountry}) •{' '}
+                {movieDetails?.genres?.map((g) => g.name).join(', ')} •{' '}
+                {movieRunTime}
               </p>
 
               {video && (
@@ -86,18 +95,11 @@ const Poster = ({ movieDetails, video }) => {
                 </button>
               )}
 
+              <OverView movieDetails={movieDetails} />
+
               <p className="text-lg font-medium text-gray-400">
                 {movieDetails?.tagline}
               </p>
-
-              <div className="flex flex-col gap-2">
-                <p className="text-2xl">Overview</p>
-                <p>
-                  {movieDetails?.overview
-                    ? movieDetails?.overview
-                    : "We don't have an overview translated in English. Help us expand our movieDetailsbase by adding one."}
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -106,36 +108,14 @@ const Poster = ({ movieDetails, video }) => {
       <div className="mt-5 flex flex-col gap-2 lg:hidden">
         <div className="flex flex-col items-center justify-center gap-2">
           <h3 className="text-center text-lg font-semibold text-white">
-            {movieDetails?.title ||
-              movieDetails?.original_title ||
-              movieDetails?.name ||
-              movieDetails?.original_name}{' '}
-            {movieDetails?.release_date || movieDetails?.first_air_date
-              ? `(${moment(
-                  movieDetails?.release_date || movieDetails?.first_air_date
-                ).format('YYYY')})`
-              : null}
+            {movieName}{' '}
+            {isDateExist ? `(${moment(isDateExist).format('YYYY')})` : null}
           </h3>
 
           <div className="flex flex-col items-center justify-center">
             <p>
-              {movieDetails?.release_date || movieDetails?.first_air_date
-                ? moment(
-                    movieDetails?.release_date || movieDetails?.first_air_date
-                  ).format('MM/DD/YYYY')
-                : null}{' '}
-              (
-              {movieDetails?.production_countries?.length
-                ? movieDetails?.production_countries[0]?.iso_3166_1
-                : movieDetails?.original_language?.toUpperCase()}
-              ) •{' '}
-              {movieDetails?.runtime
-                ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
-                : movieDetails?.episode_run_time[0]
-                ? prettyMilliseconds(
-                    movieDetails?.episode_run_time[0] * 60 * 1000
-                  )
-                : null}
+              {isDateExist ? moment(isDateExist).format('MM/DD/YYYY') : null} (
+              {productionCountry}) • {movieRunTime}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-1">
               {movieDetails?.genres?.map((g) => g.name).join(', ')}
@@ -159,15 +139,7 @@ const Poster = ({ movieDetails, video }) => {
         <div className="mt-3 px-5">
           <p className="text-sm text-gray-400">{movieDetails?.tagline}</p>
 
-          <div className="flex flex-col gap-2">
-            <p className="text-2xl">Overview</p>
-
-            <p>
-              {movieDetails?.overview
-                ? movieDetails?.overview
-                : "We don't have an overview translated in English. Help us expand our database by adding one."}
-            </p>
-          </div>
+          <OverView movieDetails={movieDetails} />
         </div>
       </div>
     </div>
