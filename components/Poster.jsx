@@ -55,7 +55,7 @@ const Poster = ({ movieDetails, video }) => {
                 ) • {movieDetails?.genres?.map((g) => g.name).join(', ')} •{' '}
                 {movieDetails?.runtime
                   ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
-                  : movieDetails?.episode_run_time
+                  : movieDetails?.episode_run_time[0]
                   ? prettyMilliseconds(
                       movieDetails?.episode_run_time[0] * 60 * 1000
                     )
@@ -118,7 +118,7 @@ const Poster = ({ movieDetails, video }) => {
               ) •{' '}
               {movieDetails?.runtime
                 ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
-                : movieDetails?.episode_run_time
+                : movieDetails?.episode_run_time[0]
                 ? prettyMilliseconds(
                     movieDetails?.episode_run_time[0] * 60 * 1000
                   )
