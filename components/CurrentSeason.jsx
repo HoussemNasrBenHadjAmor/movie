@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
 import moment from 'moment'
 
 import movie from '../public/movie.png'
@@ -25,8 +25,8 @@ const CurrentSeason = ({
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-white sm:text-xl">Current Season</h1>
-      <div className="flex flex-col rounded-md bg-white p-3 shadow-lg shadow-zinc-800 sm:flex-row sm:items-center sm:gap-3 sm:p-0">
+      <h1 className="text-white sm:text-xl">Last Season</h1>
+      <div className="flex flex-col rounded-md bg-white p-3 py-5 shadow-lg shadow-zinc-800 sm:flex-row sm:items-center sm:gap-3 sm:p-0">
         <div className="relative hidden sm:flex">
           <Link href={`/tv/${movieLink}/season/${season_number}`}>
             <a className="flex">
@@ -48,7 +48,7 @@ const CurrentSeason = ({
           </Link>
         </div>
 
-        <div className="flex flex-col gap-5 sm:px-3">
+        <div className="flex flex-col gap-5 sm:p-3">
           <div className="font-semibold text-black">
             <Link href={`/tv/${movieLink}/season/${season_number}`}>
               <a className="text-2xl hover:text-black/70">{name}</a>
@@ -59,7 +59,7 @@ const CurrentSeason = ({
             </p>
           </div>
 
-          <p className="text-black/80">
+          <p className="text-black/80 sm:max-h-20 sm:overflow-y-auto">
             {overview
               ? overview
               : `Season ${season_number} of ${movieName} premiered on ${moment(
@@ -70,7 +70,7 @@ const CurrentSeason = ({
       </div>
 
       <Link href={`/tv/${movieLink}/seasons`}>
-        <a>View All Seasons</a>
+        <a className="max-w-fit hover:opacity-75">View All Seasons</a>
       </Link>
     </div>
   )
