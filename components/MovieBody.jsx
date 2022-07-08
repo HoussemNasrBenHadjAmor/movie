@@ -15,6 +15,7 @@ const MovieBody = ({
   collections,
   recommendations,
   lastSeason,
+  media_type,
 }) => {
   const HR = () => <hr className="w-full font-extralight text-gray-200" />
 
@@ -59,6 +60,7 @@ const MovieBody = ({
           keywords={keywords}
           links={links}
           movieDetails={movieDetails}
+          media_type={media_type}
         />
       </div>
     </div>

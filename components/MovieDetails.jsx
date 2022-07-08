@@ -12,7 +12,7 @@ const fbLink = 'https://www.facebook.com'
 const twitterLink = 'https://www.twitter.com'
 const instLink = 'https://www.instagram.com'
 
-const MovieDetails = ({ links, keywords, movieDetails }) => {
+const MovieDetails = ({ links, keywords, movieDetails, media_type }) => {
   const originalLanguage = movieDetails?.spoken_languages?.filter(
     ({ english_name }) => english_name === 'English'
   )[0]
@@ -123,7 +123,7 @@ const MovieDetails = ({ links, keywords, movieDetails }) => {
 
           <div className="flex flex-wrap gap-2">
             {keywords?.map(({ name, id }) => (
-              <Tag key={id} name={name} id={id} />
+              <Tag key={id} name={name} id={id} media_type={media_type} />
             ))}
 
             {keywords?.length === 0 && <p>No keywords have been added.</p>}

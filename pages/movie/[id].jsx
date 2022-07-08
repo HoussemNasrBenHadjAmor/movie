@@ -27,6 +27,7 @@ const Movie = ({
         movieName={movieDetails.title || movieDetails.original_title}
         collections={collections}
         recommendations={recommendations}
+        media_type="movie"
       />
 
       {showModal && <Modal />}

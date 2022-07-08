@@ -50,8 +50,10 @@ const LeftPerson = ({
               ? `${process.env.NEXT_PUBLIC_BASE_URL}${profile_path}`
               : person
           }
-          width={350}
-          height={500}
+          width={100}
+          height={150}
+          // width={350}
+          // height={500}
           objectFit="cover"
           className="rounded-full sm:rounded-lg"
         />

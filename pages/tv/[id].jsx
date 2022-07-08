@@ -32,6 +32,7 @@ const Movie = ({
         }
         recommendations={recommendations}
         lastSeason={lastSeason}
+        media_type="tv"
       />
 
       {showModal && <Modal />}

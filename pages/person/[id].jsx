@@ -35,17 +35,6 @@ export const getServerSideProps = async (ctx) => {
     ).then((res) => res.json()),
   ])
 
-  const filteredCast = personCredits?.cast?.filter(
-    (crew) => crew?.release_date || crew?.first_air_date
-  )
-
-  const filteredCrew = personCredits?.crew?.filter(
-    (crew) => crew?.release_date !== '' || crew?.first_air_date !== ''
-  )
-
-  // console.log('filteredCast', filteredCast)
-  console.log('filteredCrew', filteredCrew)
-
   return {
     props: {
       personDetails,
