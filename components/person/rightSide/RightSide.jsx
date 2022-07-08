@@ -44,9 +44,13 @@ const RightSide = ({ credits, bio, name }) => {
        *TODO --- KNOW FOR Component !!
        */}
 
-      {credits?.cast && <CreditModal data={credits?.cast} name="Acting" />}
+      {credits?.cast?.length > 0 && (
+        <CreditModal data={credits?.cast} name="Acting" />
+      )}
 
-      {credits?.crew && <CreditModal data={credits?.crew} name="Production" />}
+      {credits?.crew?.length > 0 && (
+        <CreditModal data={credits?.crew} name="Production" />
+      )}
     </div>
   )
 }

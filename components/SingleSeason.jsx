@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import moment from 'moment'
 
+import movie from '../public/movie.png'
+
 const SingleSeason = ({
   season: {
     poster_path,
@@ -45,14 +47,16 @@ const SingleSeason = ({
             </Link>
 
             <p>
-              {air_date?.slice(0, 4)} {' | '} {episode_count} Episodes
+              {air_date?.slice(0, 4) || '-'} {' | '} {episode_count} Episodes
             </p>
           </div>
 
           <p>
-            {`Season ${season_number} of ${movieName} premiered on ${moment(
-              air_date
-            ).format('MMMM D[,] YYYY')}.`}
+            {air_date
+              ? `Season ${season_number} of ${movieName} premiered on ${moment(
+                  air_date
+                ).format('MMMM D[,] YYYY')}.`
+              : "We don't have an overview translated in English. Help us expand our database by adding one."}
           </p>
         </div>
 

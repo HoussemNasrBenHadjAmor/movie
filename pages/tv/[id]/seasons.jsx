@@ -1,9 +1,17 @@
+import Link from 'next/link'
+
 import { SingleSeason } from '../../../components'
+import { ArrowSmLeftIcon } from '@heroicons/react/outline'
 
 const Seasons = ({ seasons, link, movieName }) => {
   return (
     <div className="mx-auto flex max-w-[1400px] flex-col gap-10 px-5 pb-10">
-      <h1>Back to Main</h1>
+      <Link href={`/tv/${link}`}>
+        <a className="flex items-center gap-x-3 text-xl hover:opacity-75">
+          <ArrowSmLeftIcon className="h-7 w-7" />
+          Back to main
+        </a>
+      </Link>
 
       <div className="flex flex-col gap-8">
         {seasons?.map((season) => (

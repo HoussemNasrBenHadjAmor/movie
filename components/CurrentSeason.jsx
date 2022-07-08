@@ -50,7 +50,7 @@ const CurrentSeason = ({
 
         <div className="flex flex-col gap-5 sm:p-3">
           <div className="font-semibold text-black">
-            <Link href={`${movieLink}/season/${season_number}`}>
+            <Link href={`/tv/${movieLink}/season/${season_number}`}>
               <a className="text-2xl hover:text-black/70">{name}</a>
             </Link>
 
