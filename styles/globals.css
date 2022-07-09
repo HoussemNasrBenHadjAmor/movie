@@ -4,7 +4,7 @@
 
 @layer {
   body {
-    @apply bg-[#121212] text-gray-300;
+    @apply !bg-[#121212] text-gray-300;
   }
 }
 
