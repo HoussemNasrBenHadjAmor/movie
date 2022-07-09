@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer {
+  * {
+    @apply !bg-[#121212] text-gray-300;
+  }
   body {
     @apply !bg-[#121212] text-gray-300;
   }
