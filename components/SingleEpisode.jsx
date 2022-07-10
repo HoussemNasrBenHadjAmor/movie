@@ -8,8 +8,8 @@ const SingleEpisode = ({
   episode: { episode_number, name, overview, runtime, still_path, air_date },
 }) => {
   return (
-    <div className="flex flex-col gap-3 pb-3 sm:flex-row sm:items-center sm:pb-0">
-      <div className="relative flex w-full sm:w-auto">
+    <div className="flex h-full flex-col gap-3 pb-3 sm:max-h-[175px] sm:flex-row sm:items-center sm:pb-0">
+      <div className="relative flex w-full sm:w-[25%]">
         <Image
           src={
             still_path
@@ -17,19 +17,20 @@ const SingleEpisode = ({
               : movie
           }
           layout="fixed"
-          width={375}
-          height={150}
+          width={540}
+          height={175}
           blurDataURL={
             still_path
               ? `${process.env.NEXT_PUBLIC_BASE_URL}${still_path}`
               : movie
           }
+          placeholder="blur"
           objectFit="cover"
           className="rounded-tr-md rounded-tl-md sm:rounded-bl-md sm:rounded-tr-none"
         />
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-2">
+      <div className="flex flex-1 flex-col gap-3 p-2 sm:py-3">
         <div className="flex flex-col sm:flex-row sm:justify-between">
           <h1 className="font-medium text-white">
             {' '}
