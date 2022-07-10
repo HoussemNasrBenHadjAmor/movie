@@ -17,7 +17,7 @@ const SingleEpisode = ({
               : movie
           }
           layout="fixed"
-          width={540}
+          width={1920}
           height={175}
           blurDataURL={
             still_path
