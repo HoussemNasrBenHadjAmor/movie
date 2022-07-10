@@ -2,18 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer {
-  body {
-    @apply !bg-[#121212] text-gray-300;
-  }
-}
-
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: rgb(204, 204, 204);
@@ -22,4 +16,10 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(151, 151, 151);
+}
+
+@layer base {
+  body {
+    @apply !bg-[#121212] text-gray-300;
+  }
 }

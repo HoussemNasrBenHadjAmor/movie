@@ -12,7 +12,7 @@ const Recommendations = ({ recommendations }) => {
           ))}
         </div>
       ) : (
-        <p className="">
+        <p>
           We don't have enough data to suggest any movies based on Blasted. You
           can help by rating movies you've seen.
         </p>
