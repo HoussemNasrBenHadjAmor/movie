@@ -23,3 +23,6 @@
     @apply !bg-[#121212] text-gray-300;
   }
 }
+
+@layer components {
+}
