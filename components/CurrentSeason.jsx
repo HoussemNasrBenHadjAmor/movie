@@ -36,7 +36,7 @@ const CurrentSeason = ({
   return (
     <div className="flex flex-col gap-5">
       {!isMovie && <h1 className="text-white sm:text-xl">Last Season</h1>}
-      <div className="flex flex-col rounded-md bg-white p-3 py-5 shadow-lg shadow-zinc-800 sm:flex-row sm:items-center sm:gap-3 sm:p-0">
+      <div className="flex flex-col rounded-md bg-white p-3 py-5 shadow-md shadow-zinc-800/70 sm:flex-row sm:items-center sm:gap-3 sm:p-0">
         <div className="relative hidden sm:flex">
           <Link
             href={
