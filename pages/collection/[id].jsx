@@ -11,16 +11,17 @@ const Collection = ({ collection, credits }) => {
   const isEmptyCrew = credits?.crew?.length < 0
 
   return (
-    <div className="flex flex-col gap-y-3 pb-5">
+    <div className="flex min-h-screen flex-col pb-10">
       <Poster movieDetails={collection} />
 
-      <div className="mx-auto mt-10 flex max-w-[1400px] flex-col gap-10 px-5">
+      <div className="mx-auto mt-10 flex max-w-[1400px] flex-col gap-8 px-5">
         {!isEmptyCast && <Credits data={credits?.cast} />}
+
         {!isEmptyCrew && <Credits data={credits?.crew} crew />}
 
         {!isEmptyCollection && (
           <>
-            <h1 className="text-2xl font-semibold"> {nbMovie} </h1>
+            <h1 className="text-2xl font-semibold text-white"> {nbMovie} </h1>
             {collection?.parts?.map((coll) => (
               <CurrentSeason season={coll} key={coll?.id} />
             ))}

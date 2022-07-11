@@ -14,6 +14,8 @@ const Credits = ({ data, crew }) => {
               ?.slice(0, 12)
               ?.map((d) => <Credit credit={d} key={d?.id} bg />)}
       </div>
+
+      <div className="mt-3 border-b-[1px]" />
     </div>
   )
 }
