@@ -15,7 +15,7 @@ const Credits = ({ data, crew }) => {
               ?.map((d) => <Credit credit={d} key={d?.id} bg />)}
       </div>
 
-      <div className="mt-3 border-b-[1px]" />
+      <div className="mt-3 border-b-[1px] opacity-40" />
     </div>
   )
 }
