@@ -12,6 +12,10 @@ const CurrentSeason = ({
     overview,
     poster_path,
     season_number,
+    title,
+    original_title,
+    release_date,
+    id,
   },
   movieName,
   movieId,
@@ -19,16 +23,28 @@ const CurrentSeason = ({
   const re = /[^a-zA-Z0-9-]/g
 
   const movieLink = [
-    movieId,
-    movieName?.split(' ').join('-').replace(re, '').toLowerCase(),
+    movieId || id,
+    (movieName || title || original_title)
+      ?.split(' ')
+      .join('-')
+      .replace(re, '')
+      .toLowerCase(),
   ].join('-')
+
+  const isMovie = title || original_title || release_date
 
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-white sm:text-xl">Last Season</h1>
+      {!isMovie && <h1 className="text-white sm:text-xl">Last Season</h1>}
       <div className="flex flex-col rounded-md bg-white p-3 py-5 shadow-lg shadow-zinc-800 sm:flex-row sm:items-center sm:gap-3 sm:p-0">
         <div className="relative hidden sm:flex">
-          <Link href={`/tv/${movieLink}/season/${season_number}`}>
+          <Link
+            href={
+              !isMovie
+                ? `/tv/${movieLink}/season/${season_number}`
+                : `/movie/${movieLink}`
+            }
+          >
             <a className="flex">
               <Image
                 src={
@@ -50,28 +66,44 @@ const CurrentSeason = ({
 
         <div className="flex flex-col gap-5 sm:p-3">
           <div className="font-semibold text-black">
-            <Link href={`/tv/${movieLink}/season/${season_number}`}>
-              <a className="text-2xl hover:text-black/70">{name}</a>
+            <Link
+              href={
+                !isMovie
+                  ? `/tv/${movieLink}/season/${season_number}`
+                  : `/movie/${movieLink}`
+              }
+            >
+              <a className="text-2xl hover:text-black/70">
+                {name || title || original_title}
+              </a>
             </Link>
 
             <p>
-              {air_date?.slice(0, 4)} {' | '} {episode_count} Episodes
+              {isMovie && release_date
+                ? moment(release_date).format('MMMM D, YYYY')
+                : !isMovie
+                ? `${air_date?.slice(0, 4) || '-'} | ${episode_count} Episodes`
+                : null}
             </p>
           </div>
 
           <p className="text-black/80 sm:max-h-20 sm:overflow-y-auto">
             {overview
               ? overview
-              : `Season ${season_number} of ${movieName} premiered on ${moment(
+              : !overview && !isMovie
+              ? `Season ${season_number} of ${movieName} premiered on ${moment(
                   air_date
-                ).format('MMMM D[,] YYYY')}.`}
+                ).format('MMMM D[,] YYYY')}.`
+              : 'Sorry, we have no overview for this movie.'}
           </p>
         </div>
       </div>
 
-      <Link href={`/tv/${movieLink}/seasons`}>
-        <a className="max-w-fit hover:opacity-75">View All Seasons</a>
-      </Link>
+      {!isMovie && (
+        <Link href={`/tv/${movieLink}/seasons`}>
+          <a className="max-w-fit hover:opacity-75">View All Seasons</a>
+        </Link>
+      )}
     </div>
   )
 }

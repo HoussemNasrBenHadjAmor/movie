@@ -25,7 +25,7 @@ const Poster = ({ movieDetails, video }) => {
 
   const movieRunTime = movieDetails?.runtime
     ? prettyMilliseconds(movieDetails?.runtime * 60 * 1000)
-    : movieDetails?.episode_run_time[0]
+    : movieDetails?.episode_run_time?.length
     ? prettyMilliseconds(movieDetails?.episode_run_time[0] * 60 * 1000)
     : null
 
@@ -40,6 +40,13 @@ const Poster = ({ movieDetails, video }) => {
     </div>
   )
 
+  const nbMovie = movieDetails?.parts?.length > 0 && (
+    <p className="font-semibold">
+      Number of Movies:{' '}
+      <span className="font-normal">{movieDetails?.parts?.length}</span>
+    </p>
+  )
+
   return (
     <div className="items-center justify-center lg:flex">
       <div className="relative flex w-full flex-col items-center justify-center">
@@ -51,8 +58,12 @@ const Poster = ({ movieDetails, video }) => {
                 : movie.src
             }
             layout="fill"
+            blurDataURL={
+              movieDetails?.backdrop_path
+                ? `${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`
+                : movie.src
+            }
             placeholder="blur"
-            blurDataURL={`${process.env.NEXT_PUBLIC_BASE_URL}${movieDetails?.backdrop_path}`}
             objectFit="cover"
           />
         </div>
@@ -77,9 +88,9 @@ const Poster = ({ movieDetails, video }) => {
 
               <p className="flex items-center gap-1">
                 {isDateExist ? moment(isDateExist).format('MM/DD/YYYY') : null}{' '}
-                ({productionCountry}) •{' '}
-                {movieDetails?.genres?.map((g) => g.name).join(', ')} •{' '}
-                {movieRunTime}
+                {productionCountry ? `(${productionCountry}) • ` : null}
+                {movieDetails?.genres?.map((g) => g.name).join(', ')}{' '}
+                {movieRunTime ? `• ${movieRunTime}` : null}
               </p>
 
               {video && (
@@ -95,11 +106,13 @@ const Poster = ({ movieDetails, video }) => {
                 </button>
               )}
 
-              <OverView movieDetails={movieDetails} />
-
               <p className="text-lg font-medium text-gray-400">
                 {movieDetails?.tagline}
               </p>
+
+              <OverView movieDetails={movieDetails} />
+
+              {nbMovie}
             </div>
           </div>
         </div>
@@ -114,11 +127,13 @@ const Poster = ({ movieDetails, video }) => {
 
           <div className="flex flex-col items-center justify-center">
             <p>
-              {isDateExist ? moment(isDateExist).format('MM/DD/YYYY') : null} (
-              {productionCountry}) • {movieRunTime}
+              {isDateExist ? moment(isDateExist).format('MM/DD/YYYY') : null}
+              {productionCountry ? ` (${productionCountry})` : null}{' '}
+              {movieRunTime ? ` • ${movieRunTime}` : null}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-1">
               {movieDetails?.genres?.map((g) => g.name).join(', ')}
+              {nbMovie}
             </div>
 
             {video && (

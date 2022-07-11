@@ -29,15 +29,6 @@ const Recommendation = ({
     <div className="flex min-w-[75%] flex-col gap-3 rounded-lg border-none bg-white pb-3 shadow-md sm:min-w-[25%]">
       <Link href={`/${name ? 'tv' : 'movie'}/${movieLink}`}>
         <a className="relative">
-          {/* <img
-            src={
-              backdrop_path
-                ? `${process.env.NEXT_PUBLIC_BASE_URL}${backdrop_path}`
-                : movie.src
-            }
-            className="h-[150px] w-full rounded-t-lg object-cover"
-          /> */}
-
           <Image
             src={
               backdrop_path
@@ -47,8 +38,8 @@ const Recommendation = ({
             layout="responsive"
             placeholder="blur"
             blurDataURL={`${process.env.NEXT_PUBLIC_BASE_URL}${backdrop_path}`}
-            height={150}
-            width={275}
+            height={1080}
+            width={1920}
             objectFit="cover"
             className="rounded-t-lg border-none"
           />

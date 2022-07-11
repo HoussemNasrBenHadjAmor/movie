@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import defaultPerson from '../public/person.jpg'
@@ -14,14 +15,24 @@ const Cast = ({
   return (
     <div className="flex min-w-[128px] max-w-[128px] flex-col gap-3 rounded-lg bg-white pb-3 shadow-md sm:min-w-[150px] sm:max-w-[150px]">
       <Link href={`/person/${personUrl}`}>
-        <a>
-          <img
+        <a className="relative flex">
+          <Image
             src={
               profile_path
                 ? `${process.env.NEXT_PUBLIC_BASE_URL}${profile_path}`
                 : defaultPerson.src
             }
-            className="h-32 w-full rounded-t-lg object-cover sm:h-[180px]"
+            layout="fixed"
+            width={1920}
+            height={180}
+            placeholder="blur"
+            blurDataURL={
+              profile_path
+                ? `${process.env.NEXT_PUBLIC_BASE_URL}${profile_path}`
+                : defaultPerson.src
+            }
+            objectFit="cover"
+            className="rounded-t-lg"
           />
         </a>
       </Link>
