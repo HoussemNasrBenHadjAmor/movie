@@ -12,7 +12,7 @@ const Person = ({ personDetails, personCredits }) => {
           name={personDetails?.name}
           bio={
             personDetails?.biography ||
-            'We have nothing for now, help us to improve our docs!'
+            `We don't have a biography for ${personDetails?.name}.`
           }
           credits={personCredits}
         />

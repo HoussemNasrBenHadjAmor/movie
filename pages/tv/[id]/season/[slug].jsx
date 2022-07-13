@@ -1,9 +1,15 @@
 import { TopSeason, NextPrevSeason, Episodes } from '../../../../components'
 
-const Season = ({ season, id, seasons, link }) => {
+const Season = ({ season, seasons, link }) => {
   return (
     <div className="mx-auto flex max-w-[1500px] flex-col gap-10 px-3 pb-10 sm:px-5">
-      <TopSeason season={season} id={id} allSeasons={seasons} link={link} />
+      <TopSeason
+        season={season}
+        allSeasons={seasons}
+        link={link}
+        text="Back to season list"
+        type="tv"
+      />
 
       {season?.episodes && <Episodes season={season} />}
 
@@ -21,16 +27,16 @@ export const getServerSideProps = async (ctx) => {
 
   var { slug, id } = ctx.query
 
-  const idSeason = id?.split('-')[0]
+  id = id?.split('-')[0]
 
   const [season, { seasons, name, original_name, id: tvId }] =
     await Promise.all([
       fetch(
-        `${process.env.API_URL}tv/${idSeason}/season/${slug}?api_key=${process.env.API_KEY}&language=en-US`
+        `${process.env.API_URL}tv/${id}/season/${slug}?api_key=${process.env.API_KEY}&language=en-US`
       ).then((res) => res.json()),
 
       fetch(
-        `${process.env.API_URL}tv/${idSeason}?api_key=${process.env.API_KEY}&language=en-US`
+        `${process.env.API_URL}tv/${id}?api_key=${process.env.API_KEY}&language=en-US`
       ).then((res) => res.json()),
     ])
 
@@ -42,7 +48,6 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       season,
-      id,
       seasons,
       link,
     },

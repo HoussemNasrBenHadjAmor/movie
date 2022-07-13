@@ -2,13 +2,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { NextPrevSeason } from './'
-import movie from '../public/movie.png'
 import { ArrowSmLeftIcon } from '@heroicons/react/outline'
+import movie from '../public/movie.png'
 
-const TopSeason = ({ season, id, allSeasons, link }) => {
+const TopSeason = ({ season, link, allSeasons, text, type }) => {
   return (
     <div className="flex flex-col gap-1">
-      <div className="flex items-center gap-x-3 sm:gap-x-5">
+      <div className="flex gap-x-3 sm:items-center sm:gap-x-5">
         <div className="relative">
           <Image
             src={
@@ -30,20 +30,33 @@ const TopSeason = ({ season, id, allSeasons, link }) => {
 
         <div className="flex flex-col gap-3">
           <div className="flex flex-wrap gap-x-1 text-2xl font-semibold">
-            <h1 className="text-white">{season?.name || '-'}</h1>
-            {season?.air_date && `(${season?.air_date?.slice(0, 4)})`}
+            <h1 className="text-white">
+              {season?.name || season?.title || season?.original_title || '-'}
+            </h1>
+            {(season?.air_date ||
+              season?.release_date ||
+              season?.first_air_date) &&
+              `(${(
+                season?.air_date ||
+                season?.release_date ||
+                season?.first_air_date
+              )?.slice(0, 4)})`}
           </div>
 
-          <Link href={`/tv/${id}/seasons`}>
+          <Link
+            href={allSeasons ? `/${type}/${link}/seasons` : `/${type}/${link}`}
+          >
             <a className="flex items-center gap-x-1 font-medium hover:opacity-75 sm:text-xl">
               <ArrowSmLeftIcon className="h-5" />
-              Back to season list
+              {text}
             </a>
           </Link>
         </div>
       </div>
 
-      <NextPrevSeason season={season} allSeasons={allSeasons} link={link} />
+      {allSeasons && (
+        <NextPrevSeason season={season} allSeasons={allSeasons} link={link} />
+      )}
     </div>
   )
 }

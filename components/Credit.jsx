@@ -42,7 +42,7 @@ const Credit = ({
                 ? `${process.env.NEXT_PUBLIC_BASE_URL}${profile_path}`
                 : person.src
             }
-            className="rounded-tl-md rounded-bl-md"
+            className={`rounded-tl-md rounded-bl-md ${!bg && 'rounded-md'}`}
           />
         </a>
       </Link>
