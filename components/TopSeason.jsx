@@ -6,6 +6,9 @@ import { ArrowSmLeftIcon } from '@heroicons/react/outline'
 import movie from '../public/movie.png'
 
 const TopSeason = ({ season, link, allSeasons, text, type }) => {
+  const date =
+    season?.air_date || season?.release_date || season?.first_air_date
+
   return (
     <div className="flex flex-col gap-1">
       <div className="flex gap-x-3 sm:items-center sm:gap-x-5">
@@ -33,14 +36,7 @@ const TopSeason = ({ season, link, allSeasons, text, type }) => {
             <h1 className="text-white">
               {season?.name || season?.title || season?.original_title || '-'}
             </h1>
-            {(season?.air_date ||
-              season?.release_date ||
-              season?.first_air_date) &&
-              `(${(
-                season?.air_date ||
-                season?.release_date ||
-                season?.first_air_date
-              )?.slice(0, 4)})`}
+            {date && `(${date?.slice(0, 4)})`}
           </div>
 
           <Link
