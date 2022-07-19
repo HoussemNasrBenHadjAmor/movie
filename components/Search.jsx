@@ -16,7 +16,7 @@ const Search = ({ searchTerm }) => {
 
   return (
     <div className="rounded-lg bg-zinc-800 p-2 pb-0 shadow-md shadow-zinc-900">
-      {results?.length > 0 && results ? (
+      {results?.length && results ? (
         <div className="flex flex-col gap-3">
           {results?.slice(0, 5)?.map((result, i) => (
             <SearchModel data={result} bg={i % 2 !== 0} key={result?.id} />
