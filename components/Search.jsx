@@ -11,6 +11,8 @@ const Search = ({ searchTerm }) => {
       `${process.env.NEXT_PUBLIC_API_URL}search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&query=${searchTerm}&page=1&include_adult=false`
     ).then((res) => res.json())
 
+    console.log('data', data)
+
     setResults(data)
   }, [searchTerm])
 
