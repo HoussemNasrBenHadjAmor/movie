@@ -5,7 +5,7 @@ import { Movies } from '.'
 import { PlayIcon, FilmIcon } from '@heroicons/react/outline'
 
 const communButton =
-  'flex items-center gap-2 rounded-md p-1 px-2 justify-center transition-all duration-300 ease-in-out'
+  'flex items-center gap-2 flex-wrap rounded-md p-1 px-2 justify-center transition-all duration-300 ease-in-out'
 
 const MovieModel = ({ tvTrending, movieTrending, isTrending, title, data }) => {
   const [movies, setMovies] = useState(true)
@@ -20,8 +20,8 @@ const MovieModel = ({ tvTrending, movieTrending, isTrending, title, data }) => {
             <button
               className={`${communButton} ${
                 movies
-                  ? 'bg-cyan-600 text-white'
-                  : 'bg-zinc-600 hover:bg-zinc-700'
+                  ? 'bg-cyan-600 text-sm text-white sm:text-base'
+                  : 'bg-zinc-600 text-sm hover:bg-zinc-700 sm:text-base'
               }`}
               onClick={() => setMovies(!movies)}
             >
@@ -32,8 +32,8 @@ const MovieModel = ({ tvTrending, movieTrending, isTrending, title, data }) => {
             <button
               className={`${communButton} ${
                 !movies
-                  ? 'bg-cyan-600 text-white'
-                  : 'bg-zinc-600 hover:bg-zinc-700'
+                  ? 'bg-cyan-600 text-sm text-white sm:text-base'
+                  : 'bg-zinc-600 text-sm hover:bg-zinc-700 sm:text-base'
               }`}
               onClick={() => setMovies(!movies)}
             >

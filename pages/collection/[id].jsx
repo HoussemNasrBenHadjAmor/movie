@@ -15,9 +15,11 @@ const Collection = ({ collection, credits }) => {
       <Poster movieDetails={collection} />
 
       <div className="mx-auto mt-10 flex max-w-[1400px] flex-col gap-8 px-5">
-        {!isEmptyCast && <Credits data={credits?.cast} bg />}
+        {!isEmptyCast && <Credits data={credits?.cast} bg text="Featured" />}
 
-        {!isEmptyCrew && <Credits data={credits?.crew} crew bg />}
+        {!isEmptyCrew && (
+          <Credits data={credits?.crew} crew bg text="Featured" />
+        )}
 
         {!isEmptyCollection && (
           <>

@@ -1,12 +1,12 @@
 import { Credit } from './'
 
-const Credits = ({ data, crew, bg, all }) => {
+const Credits = ({ data, crew, bg, all, text }) => {
   const dataToMap = all ? data : crew ? data?.slice(0, 8) : data?.slice(0, 12)
 
   return (
     <div className="flex flex-col gap-5">
       <h1 className="text-xl font-semibold text-white">
-        Featured {crew ? 'Crew' : 'Cast'}
+        {text} {crew ? 'Crew' : 'Cast'}
       </h1>
 
       <div

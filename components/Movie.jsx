@@ -21,19 +21,24 @@ const Movie = ({ data }) => {
         data?.first_air_date || data?.name ? 'tv' : 'movie'
       }/${movieLink}`}
     >
-      <a className="group flex transform flex-col gap-3 transition duration-300 ease-in-out sm:hover:z-40 sm:hover:scale-105">
+      <a className="group flex w-full transform flex-col gap-3 transition duration-300 ease-in-out sm:hover:z-40 sm:hover:scale-105">
         <Image
           layout="responsive"
           height={1080}
           width={1920}
+          objectFit="cover"
           src={`${process.env.NEXT_PUBLIC_BASE_URL}${
+            data?.backdrop_path || data?.poster_path
+          }`}
+          placeholder="blur"
+          blurDataURL={`${process.env.NEXT_PUBLIC_BASE_URL}${
             data?.backdrop_path || data?.poster_path
           }`}
           className="rounded-md"
         />
 
         <div className="px-1">
-          <p className="max-w-md truncate">{data.overview}</p>
+          <p className="max-w-[200px] truncate">{data.overview}</p>
 
           <h2 className="text-2xl text-white transition-all duration-200 ease-in-out group-hover:font-semibold">
             {data?.title ||
