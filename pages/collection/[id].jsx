@@ -1,4 +1,4 @@
-import { Poster, CurrentSeason, Credit, Credits } from '../../components'
+import { Poster, CurrentSeason, Credits } from '../../components'
 
 const Collection = ({ collection, credits }) => {
   const nbMovie =
@@ -25,7 +25,7 @@ const Collection = ({ collection, credits }) => {
           <>
             <h1 className="text-2xl font-semibold text-white"> {nbMovie} </h1>
             {collection?.parts?.map((coll) => (
-              <CurrentSeason season={coll} key={coll?.id} />
+              <CurrentSeason season={coll} key={coll?.id} show={false} />
             ))}
           </>
         )}

@@ -36,6 +36,7 @@ const MovieBody = ({
               season={lastSeason}
               movieName={movieName}
               movieId={movieDetails?.id}
+              show
             />
           </>
         )}
