@@ -53,7 +53,7 @@ const SearchPin = ({
 
   return (
     <Link href={href}>
-      <a className="flex flex-col gap-2">
+      <a className="group flex flex-col gap-2 transition-all duration-[400ms] ease-in-out hover:scale-95">
         <div>
           <Image
             src={srcImage}
@@ -67,7 +67,7 @@ const SearchPin = ({
           />
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 transition-all delay-200 ease-in-out group-hover:text-white">
           <h3 className="max-w-md truncate text-sm"> {namePin} </h3>
           <div className="flex flex-wrap items-center justify-between">
             <div className="flex items-center gap-2 text-xs">

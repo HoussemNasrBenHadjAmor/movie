@@ -1,12 +1,30 @@
-import { CurrentSeason, SearchPins } from '../../components'
+import { SearchPins, Pagination } from '../../components'
 
 const Index = ({ data }) => {
+  const notEmpty = data?.results?.length
+
+  const info = {
+    currentPage: data?.page,
+    totalPages: data?.total_pages,
+  }
+
   return (
-    <div className="mx-auto flex max-w-[1400px] flex-col gap-5 px-5 pb-10">
+    <div className="mx-auto flex min-h-screen max-w-[1400px] flex-col gap-5 px-5 pb-10">
       {/* {data?.results?.map((result) => (
         <CurrentSeason season={result} key={result?.id} show={false} />
       ))} */}
-      <SearchPins data={data?.results} />
+      {notEmpty ? (
+        <div className="flex flex-col gap-5">
+          <SearchPins data={data?.results} />
+          <div className="mt-10 flex items-center justify-center">
+            <Pagination info={info} />
+          </div>
+        </div>
+      ) : (
+        <div className="grid place-items-center">
+          <p>Sorry, there's no results that matched your query. </p>
+        </div>
+      )}
     </div>
   )
 }

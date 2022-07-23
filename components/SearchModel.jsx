@@ -73,7 +73,7 @@ const SearchModel = ({
               <span className="text-base">•</span>
               <p>{date}</p>
               <span className="hidden text-base md:flex">•</span>
-              <div className="hidden rounded-md bg-slate-50 p-1 text-black md:flex">
+              <div className="hidden rounded-md border-[1px] border-slate-50/30 p-[3px] md:flex">
                 <p className="text-xs">
                   {media_type === 'tv' ? 'TV' : 'Movie'}
                 </p>
