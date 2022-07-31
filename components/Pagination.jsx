@@ -1,38 +1,46 @@
+import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import ReactPaginate from 'react-paginate'
 
 const Pagination = ({ info: { currentPage, totalPages } }) => {
-  const array = []
+  const communStyle = 'px-2 p-1 rounded-full'
+  const items = []
+  for (let i = 1; i <= totalPages; i++) {
+    items.push(i)
+  }
+  const itemsPerPage = 1
+  const pageCount = Math.ceil(items.length / itemsPerPage)
+  const [searchQuery, setSearchQuery] = useState('')
+  const router = useRouter()
 
-  for (let i = 0; i < totalPages; i++) {
-    array.push(i)
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % items.length
+    router.push(`/search?query=${searchQuery}&page=${newOffset + 1}`)
   }
 
-  const mapedArray =
-    array?.length > 9
-      ? `${array?.slice(0, 3)}...${array?.slice(
-          array?.length - 1,
-          array?.length
-        )}`
-      : array
-
-  console.log('mapedArray', mapedArray)
-
-  const Modal = ({ i }) => (
-    <div
-      className={`flex items-center justify-center rounded-full bg-zinc-900 p-1 px-2 ${
-        currentPage === i && 'bg-gray-50 text-black'
-      }`}
-    >
-      <p> {i} </p>
-    </div>
-  )
+  useEffect(() => {
+    const { query } = router.query || ''
+    setSearchQuery(query)
+  }, [pageCount])
 
   return (
-    <div className="flex gap-2">
-      {array?.map((i) => (
-        <Modal i={i + 1} />
-      ))}
-    </div>
+    <ReactPaginate
+      breakLabel="..."
+      nextLabel=">"
+      onPageChange={handlePageClick}
+      pageRangeDisplayed={4}
+      pageCount={pageCount}
+      previousLabel="<"
+      renderOnZeroPageCount={null}
+      activeClassName={`${communStyle} bg-gray-50 text-black`}
+      className="flex flex-wrap items-center justify-center gap-x-2 gap-y-3"
+      nextClassName={`${communStyle} text-white bg-zinc-900`}
+      previousClassName={`${communStyle} text-white bg-zinc-900`}
+      disabledClassName="bg-gray-100/20 cursor-not-allowed"
+      disabledLinkClassName="cursor-not-allowed"
+      pageClassName={communStyle}
+      forcePage={currentPage - 1}
+    />
   )
 }
 

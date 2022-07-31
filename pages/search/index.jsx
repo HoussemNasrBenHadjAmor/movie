@@ -10,13 +10,10 @@ const Index = ({ data }) => {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-[1400px] flex-col gap-5 px-5 pb-10">
-      {/* {data?.results?.map((result) => (
-        <CurrentSeason season={result} key={result?.id} show={false} />
-      ))} */}
       {notEmpty ? (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-16">
           <SearchPins data={data?.results} />
-          <div className="mt-10 flex items-center justify-center">
+          <div className="flex items-center justify-center">
             <Pagination info={info} />
           </div>
         </div>
