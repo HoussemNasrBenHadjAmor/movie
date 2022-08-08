@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const SearchResults = ({ query }) => {
-  const router = useRouter()
-  const routerPath = router.pathname.slice(8, router.pathname.length)
+  const { pathname } = useRouter()
+  const routerPath = pathname.slice(8, pathname.length)
 
   const [results, setResults] = useState({
     movies: null,

@@ -8,8 +8,8 @@ const Pagination = ({ info: { currentPage, totalPages } }) => {
   for (let i = 1; i <= totalPages; i++) {
     items.push(i)
   }
-  const router = useRouter()
-  const routerPath = router.pathname.slice(8, router.pathname.length) || ''
+  const { pathname, query } = useRouter()
+  const routerPath = pathname.slice(8, pathname.length) || ''
   const itemsPerPage = 1
   const pageCount = Math.ceil(items.length / itemsPerPage)
   const [searchQuery, setSearchQuery] = useState('')
@@ -22,8 +22,7 @@ const Pagination = ({ info: { currentPage, totalPages } }) => {
   }
 
   useEffect(() => {
-    const { query } = router.query || ''
-    setSearchQuery(query)
+    setSearchQuery(query || '')
   }, [pageCount])
 
   return (

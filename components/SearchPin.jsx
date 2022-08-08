@@ -21,8 +21,8 @@ const SearchPin = ({
   },
 }) => {
   const re = /[^a-zA-Z0-9-]/g
-  const router = useRouter()
-  const routerPath = router.pathname.slice(8, router.pathname.length) || 'movie'
+  const { pathname } = useRouter()
+  const routerPath = pathname.slice(8, pathname.length) || 'movie'
 
   const movieLink = [
     id,

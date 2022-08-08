@@ -12,7 +12,7 @@ const Index = ({ data, query }) => {
     <div className="mx-auto flex min-h-screen max-w-[1400px] flex-col gap-5 px-5 pb-10">
       {notEmpty ? (
         <div className="flex flex-col gap-16">
-          <div className="flex flex-col gap-3 lg:flex-row">
+          <div className="flex flex-col gap-10 lg:flex-row">
             <div className="w-full lg:w-1/5">
               <SearchResults query={query} />
             </div>
@@ -25,8 +25,13 @@ const Index = ({ data, query }) => {
           </div>
         </div>
       ) : (
-        <div className="grid place-items-center">
-          <p>Sorry, there's no results that matched your query. </p>
+        <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-10 lg:flex-row">
+            <div className="w-full lg:w-1/5">
+              <SearchResults query={query} />
+            </div>
+            <p>Sorry, there are no persons results that matched your query. </p>
+          </div>
         </div>
       )}
     </div>
