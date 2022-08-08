@@ -1,4 +1,4 @@
-import { SearchPins, Pagination, SearchResults } from '../../components'
+import { SearchPins, Pagination, SearchResults } from '../../../components'
 
 const Index = ({ data, query }) => {
   const notEmpty = data?.results?.length

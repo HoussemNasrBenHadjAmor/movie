@@ -1,4 +1,4 @@
-import { SearchPins, Pagination, SearchResults } from '../../components'
+import { SearchPins, Pagination, SearchResults } from '../../../components'
 
 const Index = ({ data, query }) => {
   const notEmpty = data?.results?.length
@@ -39,7 +39,7 @@ export const getServerSideProps = async (ctx) => {
   const { query, page } = ctx.query
 
   const data = await fetch(
-    `${process.env.API_URL}search/movie?api_key=${
+    `${process.env.API_URL}search/tv?api_key=${
       process.env.API_KEY
     }&language=en-US&query=${query}&page=${page || 1}&include_adult=false`
   ).then((res) => res.json())
