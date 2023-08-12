@@ -16,16 +16,6 @@ const Navbar = () => {
         <a className="text-2xl sm:text-3xl">Movies</a>
       </Link>
 
-      <div className="hidden items-center gap-10 md:flex">
-        {navItems.map(({ name, to }) => (
-          <Link href={to} key={name}>
-            <a className="transition-all duration-300 ease-in-out hover:text-cyan-600">
-              {name}
-            </a>
-          </Link>
-        ))}
-      </div>
-
       <div
         className="relative flex w-2/6 flex-col"
         // onBlur={() => {
@@ -57,6 +47,16 @@ const Navbar = () => {
             <Search searchTerm={searchValue} setFocus={setFocus} />
           </div>
         )}
+      </div>
+
+      <div className="hidden items-center gap-10 md:flex">
+        {navItems.map(({ name, to }) => (
+          <Link href={to} key={name}>
+            <a className="transition-all duration-300 ease-in-out hover:text-cyan-600">
+              {name}
+            </a>
+          </Link>
+        ))}
       </div>
     </nav>
   )
