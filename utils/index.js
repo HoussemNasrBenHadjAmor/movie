@@ -7,10 +7,10 @@ export const navItems = [
     name: 'TV Shows',
     to: '/tv-shows',
   },
-  {
-    name: 'Top IMDB',
-    to: '/imdb',
-  },
+  // {
+  //   name: 'Top IMDB',
+  //   to: '/imdb',
+  // },
 ]
 
 export const sortOptions = {
@@ -117,13 +117,19 @@ export const trendingTvFetch = `${process.env.API_URL}trending/tv/day?api_key=${
 // const latestMoviesFetch = `${process.env.API_URL}discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&page=1&primary_release_date.gte=2022-04-24&primary_release_date.lte=2022-05-24`
 
 export const latestMoviesFetch =
-  'https://api.themoviedb.org/3/discover/movie?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&sort_by=popularity.desc&page=1&primary_release_date.gte=2022-04-24&primary_release_date.lte=2022-05-24'
+  'https://api.themoviedb.org/3/discover/movie?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&sort_by=popularity.desc&page=1'
 
 export const lastestTvFetch =
-  'https://api.themoviedb.org/3/discover/tv?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&sort_by=popularity.desc&air_date.gte=2022-04-24&air_date.lte=2022-05-24&page=1&timezone=America%2FNew_York'
+  'https://api.themoviedb.org/3/discover/tv?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&sort_by=popularity.desc'
+
+// export const comingMoviesFetch =
+//   'https://api.themoviedb.org/3/discover/movie?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&sort_by=popularity.desc&page=1'
 
 export const comingMoviesFetch =
-  'https://api.themoviedb.org/3/discover/movie?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&sort_by=popularity.desc&page=1&primary_release_date.gte=2022-05-24&primary_release_date.lte=2022-12-31'
+  'https://api.themoviedb.org/3/movie/upcoming?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&page=1'
 
 export const comingTvFetch =
-  'https://api.themoviedb.org/3/discover/tv?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&sort_by=popularity.desc&first_air_date.gte=2022-05-24&first_air_date.lte=2022-12-31&page=1&timezone=America%2FNew_York'
+  'https://api.themoviedb.org/3/tv/on_the_air?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&page=1'
+
+// export const comingTvFetch =
+//   'https://api.themoviedb.org/3/discover/tv?api_key=f8824d7407d43096199ef173fdc47d47&language=en-US&sort_by=popularity.desc&page=1'

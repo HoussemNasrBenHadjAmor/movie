@@ -11,7 +11,7 @@ import {
 
 const Index = ({ data }) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col px-5">
       <MovieModel
         tvTrending={data.tvTrending}
         movieTrending={data.movieTrending}

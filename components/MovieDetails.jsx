@@ -123,7 +123,7 @@ const MovieDetails = ({ links, keywords, movieDetails, media_type }) => {
 
           <div className="flex flex-wrap gap-2">
             {keywords?.map(({ name, id }) => (
-              <Tag key={id} name={name} id={id} media_type={media_type} />
+              <Tag key={id} name={name} />
             ))}
 
             {keywords?.length === 0 && <p>No keywords have been added.</p>}
