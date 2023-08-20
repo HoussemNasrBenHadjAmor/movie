@@ -1,6 +1,6 @@
 import { SearchPins, Pagination, SearchResults } from '../../components'
 
-const Index = ({ data, query }) => {
+const Index = ({ data, correctQuery }) => {
   const notEmpty = data?.results?.length
 
   const info = {
@@ -14,7 +14,7 @@ const Index = ({ data, query }) => {
         <div className="flex flex-col gap-16">
           <div className="flex flex-col gap-10 lg:flex-row">
             <div className="w-full lg:w-1/5">
-              <SearchResults query={query} />
+              <SearchResults query={correctQuery} />
             </div>
             <div className="w-full lg:w-4/5">
               <SearchPins data={data?.results} />
@@ -28,9 +28,9 @@ const Index = ({ data, query }) => {
         <div className="flex flex-col gap-16">
           <div className="flex flex-col gap-10 lg:flex-row">
             <div className="w-full lg:w-1/5">
-              <SearchResults query={query} />
+              <SearchResults query={correctQuery} />
             </div>
-            <p>Sorry, there are no movies that matched your query. </p>
+            <p>Sorry, there are no movies that matched your query.</p>
           </div>
         </div>
       )}
@@ -42,17 +42,20 @@ export default Index
 
 export const getServerSideProps = async (ctx) => {
   const { query, page } = ctx.query
+  const correctQuery = query ? query : 'spiderman'
 
   const data = await fetch(
     `${process.env.API_URL}search/movie?api_key=${
       process.env.API_KEY
-    }&language=en-US&query=${query}&page=${page || 1}&include_adult=false`
+    }&language=en-US&query=${correctQuery}&page=${
+      page || 1
+    }&include_adult=false`
   ).then((res) => res.json())
 
   return {
     props: {
       data,
-      query,
+      correctQuery,
     },
   }
 }
