@@ -4,7 +4,6 @@ import { useDebounce } from 'use-debounce'
 import { Search } from './'
 import { navItems } from '../utils'
 import { SearchIcon } from '@heroicons/react/outline'
-import { RxHamburgerMenu } from 'react-icons/rx'
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [focus, setFocus] = useState(false)
@@ -20,7 +19,6 @@ const Navbar = () => {
         <Link href="/results">
           <SearchIcon className="h-5 w-5" />
         </Link>
-        <RxHamburgerMenu className="h-5 w-5" />
       </div>
 
       <div

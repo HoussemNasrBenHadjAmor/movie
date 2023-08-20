@@ -1,5 +1,5 @@
+import Link from 'next/link'
 import { MovieModel } from '../components'
-
 import {
   trendingMovieFetch,
   trendingTvFetch,
@@ -12,6 +12,16 @@ import {
 const Index = ({ data }) => {
   return (
     <div className="flex flex-col px-5">
+      <div className="mb-10 flex items-center justify-center gap-4 lg:hidden">
+        <Link href="/movies">
+          <a className="rounded-lg bg-zinc-800 p-1 px-5">Movies</a>
+        </Link>
+
+        <Link href="/tv-shows">
+          <a className="rounded-lg bg-zinc-800 p-1 px-5">Tv</a>
+        </Link>
+      </div>
+
       <MovieModel
         tvTrending={data.tvTrending}
         movieTrending={data.movieTrending}
